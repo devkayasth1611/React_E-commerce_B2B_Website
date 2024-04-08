@@ -4,19 +4,23 @@ const ProductSchema = new Schema(
     {
         productName:{
             type: String,
-            // required: true, 
+            required: true, 
+            trim : true,
         },
         productDetails:{
             type: String,
-            // required: true,
+            required: true,
+            trim : true,
         },
         productPrice:{
             type: Number,
-            // required: true,
+            required: true,
+            trim : true,
         },
         productQuantity:{
             type: Number,
-            // required: true,
+            required: true,
+            trim : true,
         },
         createdAt:{
             type: Date,

@@ -1,41 +1,39 @@
-const productSchema = require("../model/productModel");
+const customerSchema = require("../model/customerModel");
 
-exports.createProduct = (req,res) => {
-    const product = new productSchema(req.body);
-    product.save()
-    .then((data)=>{
+exports.addCustomer = (req,res) => {
+    const customer = new customerSchema(req.body);
+    customer.save().then((data) => {
         if(!data)
         {
             res.json({
-                message: "Something went wrong while saving the product",
-                status: 400,
+                message: "Somthing went wrong while saving the customer",
+                ststus: 400,
                 error: err,
-              });
+            });
         }
         else
         {
             res.json({
-                message: "Product saved successfully",
+                message: "Customer add successfully",
                 status: 200,
                 data: data,
               });
         }
     }).catch((err)=>{
         res.json({
-            message: "Something went wrong while saving the product",
+            message: "Something went wrong while saving the customer",
             status: 400,
             error: err,
           });
     })
-
 }
 
-exports.getAllProducts = (req,res) => {
+exports.getAllCustomer = (req,res) => {
     productSchema.find().then((data)=>{
         if(!data)
         {
             res.json({
-                message: "Something went wrong while saving the product",
+                message: "Something went wrong while saving the customer",
                 status: 400,
                 error: err,
               });
@@ -43,14 +41,14 @@ exports.getAllProducts = (req,res) => {
         else
         {
             res.json({
-                message: "Product saved successfully",
+                message: "Customer saved successfully",
                 status: 200,
                 data: data,
               });
         }
     }).catch((err)=>{
         res.json({
-            message: "Something went wrong while saving the product",
+            message: "Something went wrong while saving the customer",
             status: 400,
             error: err,
           });
