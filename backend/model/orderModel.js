@@ -25,6 +25,14 @@ const OrderSchema = new Schema(
             type:Number,
             required:true,
             trim:true,
+        },
+        createdAt:{
+            type : Date,
+            default : Date.now,
+        },
+        updatedAt:{
+            type : Date,
+            default : Date.now,
         }
     },
     {

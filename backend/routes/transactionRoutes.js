@@ -2,7 +2,9 @@ const express = require('express');
 const router = express.Router();
 const transactionController = require('../controller/tranactionController'); 
 
-router.post('/order',transactionController.createTransaction);
-router.get('/order',transactionController.getAllTransaction);
+router.post('/transaction',transactionController.createTransaction);
+router.get('/transaction',transactionController.getAllTransaction);
+router.get("/transaction/:id", transactionController.getTransactionById);
+router.post("/transaction/:id", transactionController.updatetransaction);
 
 module.exports = router;

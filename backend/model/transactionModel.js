@@ -16,10 +16,18 @@ const TransactionSchema = new Schema(
             required:true,
             trim:true,
         },
+        createdAt:{
+            type : Date,
+            default : Date.now,
+        },
+        updatedAt:{
+            type : Date,
+            default : Date.now,
+        }
     },
     {
         timestamps:true,
     }
 )
 
-module.exports = mongoose.model('Tansaction',TransactionSchema)
+module.exports = mongoose.model('Transaction',TransactionSchema)

@@ -29,11 +29,11 @@ exports.addCustomer = (req,res) => {
 }
 
 exports.getAllCustomer = (req,res) => {
-    productSchema.find().then((data)=>{
+    customerSchema.find().then((data)=>{
         if(!data)
         {
             res.json({
-                message: "Something went wrong while saving the customer",
+                message: "Something went wrong while fetching the customer",
                 status: 400,
                 error: err,
               });
@@ -41,16 +41,69 @@ exports.getAllCustomer = (req,res) => {
         else
         {
             res.json({
-                message: "Customer saved successfully",
+                message: "Customer fetch successfully",
                 status: 200,
                 data: data,
               });
         }
     }).catch((err)=>{
         res.json({
-            message: "Something went wrong while saving the customer",
+            message: "Something went wrong while fetching the customer",
             status: 400,
             error: err,
           });
     })
 }
+
+exports.getCustomerById = (req, res) => {
+    // const proId = req.params.id;
+    customerSchema
+      .findById(req.params.id)
+      .then((data) => {
+        if (!data) {
+          res.json({
+            message: "Something went wrong while fetching the Customer",
+            status: 400,
+            error: err,
+          });
+        } else {
+          res.json({
+            message: "Customer fetched successfully",
+            status: 200,
+            data: data,
+          });
+        }
+      })
+      .catch((err) => {
+        res.json({
+          message: "Something went wrong while fetching the Customer",
+          status: 400,
+          error: err,
+        });
+      });
+  };
+  
+  exports.updateCustomer = (req, res) => {
+    customerSchema
+      .findOneAndUpdate(
+        {
+          _id: req.params.id,
+        },
+        { $set: req.body }
+      )
+      .then((data) => {
+        if (!data) {
+          res.json({
+            message: "Something went wrong while updating the Customer",
+            status: 400,
+            error: err,
+          });
+        } else {
+          res.json({
+            message: "Customer updated successfully",
+            status: 200,
+            data: data,
+          });
+        }
+      });
+  };

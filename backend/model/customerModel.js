@@ -15,7 +15,8 @@ const CustomerSchema = new Schema(
         customerEmail:{
             type : String,
             required : true,
-            trim : true,
+            unique: true,
+            //trim : true,
         },
         customerAddress:{
             type : String,
@@ -23,6 +24,10 @@ const CustomerSchema = new Schema(
             trim : true,
         },
         createdAt:{
+            type : Date,
+            default : Date.now,
+        },
+        updatedAt:{
             type : Date,
             default : Date.now,
         }
