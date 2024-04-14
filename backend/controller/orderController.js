@@ -84,7 +84,7 @@ exports.getOrderById = (req, res) => {
       });
   };
   
-  exports.updateOrder = (req, res) => {
+  exports.updateOrderById = (req, res) => {
     orderSchema
       .findOneAndUpdate(
         {
@@ -106,5 +106,61 @@ exports.getOrderById = (req, res) => {
             data: data,
           });
         }
-      });
+      })
   };
+
+  exports.deleteAllOrder = (req,res) => {
+    orderSchema.deleteMany()
+    .then((data) => {
+      if(!data){
+        res.json({
+          message: "Something went wrong while deleting the All order",
+            status: 400,
+            error: err,
+        });
+      }else{
+        res.json({
+          message: "All Order deleted Successfully",
+            status: 200,
+            data: data,
+        });
+      }
+    }).catch((err) => {
+      res.json({
+        message: "Something went wrong while deleting the All order",
+            status: 400,
+            error: err,
+      })
+    })
+  }
+
+  exports.deleteOrderById = (req,res) => {
+    const id = req.params.id;
+    console.log(id);
+    orderSchema.findOneAndDelete(
+      {
+        _id : id,
+      },
+    )
+    .then((data) => {
+      if(!data){
+        res.json({
+          message: "Something went wrong while deleting the order",
+            status: 400,
+            error: err,
+        });
+      }else{
+        res.json({
+          message: "Order deleted Successfully",
+            status: 200,
+            data: data,
+        });
+      }
+    }).catch((err) => {
+      res.json({
+        message: "Something went wrong while deleting the order",
+            status: 400,
+            error: err,
+      })
+    })
+  }

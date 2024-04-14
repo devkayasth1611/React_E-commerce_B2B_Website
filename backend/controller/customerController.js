@@ -6,7 +6,7 @@ exports.addCustomer = (req,res) => {
         if(!data)
         {
             res.json({
-                message: "Somthing went wrong while saving the customer",
+                message: "Somthing went wrong while adding the customer",
                 ststus: 400,
                 error: err,
             });
@@ -21,7 +21,7 @@ exports.addCustomer = (req,res) => {
         }
     }).catch((err)=>{
         res.json({
-            message: "Something went wrong while saving the customer",
+            message: "Something went wrong while adding the customer",
             status: 400,
             error: err,
           });
@@ -83,7 +83,7 @@ exports.getCustomerById = (req, res) => {
       });
   };
   
-  exports.updateCustomer = (req, res) => {
+  exports.updateCustomerById = (req, res) => {
     customerSchema
       .findOneAndUpdate(
         {
@@ -105,5 +105,61 @@ exports.getCustomerById = (req, res) => {
             data: data,
           });
         }
-      });
+      })
   };
+
+  exports.deleteAllCustomer = (req,res) => {
+    customerSchema.deleteMany()
+    .then((data) => {
+      if(!data){
+        res.json({
+          message: "Something went wrong while deleting the All customer",
+            status: 400,
+            error: err,
+        });
+      }else{
+        res.json({
+          message: "All Customer deleted Successfully",
+            status: 200,
+            data: data,
+        });
+      }
+    }).catch((err) => {
+      res.json({
+        message: "Something went wrong while deleting the All customer",
+            status: 400,
+            error: err,
+      })
+    })
+  }
+
+  exports.deleteCustomerById = (req,res) => {
+    const id = req.params.id;
+    console.log(id);
+    customerSchema.findOneAndDelete(
+      {
+        _id : id,
+      },
+    )
+    .then((data) => {
+      if(!data){
+        res.json({
+          message: "Something went wrong while deleting the customer",
+            status: 400,
+            error: err,
+        });
+      }else{
+        res.json({
+          message: "Customer deleted Successfully",
+            status: 200,
+            data: data,
+        });
+      }
+    }).catch((err) => {
+      res.json({
+        message: "Something went wrong while deleting the customer",
+            status: 400,
+            error: err,
+      })
+    })
+  }

@@ -84,7 +84,7 @@ exports.getTransactionById = (req, res) => {
       });
   };
   
-  exports.updatetransaction = (req, res) => {
+  exports.updatetransactionById = (req, res) => {
     transactionSchema
       .findOneAndUpdate(
         {
@@ -106,5 +106,61 @@ exports.getTransactionById = (req, res) => {
             data: data,
           });
         }
-      });
+      })
   };
+
+  exports.deleteAllTransaction = (req,res) => {
+    transactionSchema.deleteMany()
+    .then((data) => {
+      if(!data){
+        res.json({
+          message: "Something went wrong while deleting the All Transaction",
+            status: 400,
+            error: err,
+        });
+      }else{
+        res.json({
+          message: "All Transaction deleted Successfully",
+            status: 200,
+            data: data,
+        });
+      }
+    }).catch((err) => {
+      res.json({
+        message: "Something went wrong while deleting the All Transaction",
+            status: 400,
+            error: err,
+      })
+    })
+  }
+
+  exports.deleteTransactionById = (req,res) => {
+    const id = req.params.id;
+    console.log(id);
+    transactionSchema.findOneAndDelete(
+      {
+        _id : id,
+      },
+    )
+    .then((data) => {
+      if(!data){
+        res.json({
+          message: "Something went wrong while deleting the transaction",
+            status: 400,
+            error: err,
+        });
+      }else{
+        res.json({
+          message: "Transaction deleted Successfully",
+            status: 200,
+            data: data,
+        });
+      }
+    }).catch((err) => {
+      res.json({
+        message: "Something went wrong while deleting the Transaction",
+            status: 400,
+            error: err,
+      })
+    })
+  }
