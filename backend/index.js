@@ -32,3 +32,15 @@ app.use("/orders", orderRoutes);
 
 const transactionRoutes = require("./routes/transactionRoutes");
 app.use("/transactions", transactionRoutes);
+
+const feedbackRoutes = require("./routes/feedbackRoutes");
+app.use("/feedbacks", feedbackRoutes);
+
+const adminRoutes = require("./routes/adminRoutes");
+app.use("/admins", adminRoutes);
+
+const categoryRoutes = require("./routes/categoryRoutes");
+app.use("/categories", categoryRoutes);
+
+const subCategoryRoutes = require("./routes/subCategoryRoutes");
+app.use("/subcategories", subCategoryRoutes);

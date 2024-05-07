@@ -1,13 +1,13 @@
-const transactionSchema = require('../model/transactionModel')
+const categorySchema = require('../model/categoryModel')
 
-exports.createTransaction = (req,res) => {
-    const transaction = new transactionSchema(req.body);
-    transaction.save()
+exports.createCategory = (req,res) => {
+    const category = new categorySchema(req.body);
+    category.save()
     .then((data)=>{
         if(!data)
         {
             res.json({
-                message: "Something went wrong while saving transaction",
+                message: "Something went wrong while saving category",
                 status: 400,
                 error: err,
             });
@@ -15,26 +15,26 @@ exports.createTransaction = (req,res) => {
         else
         {
             res.json({
-                message: "Transaction Saved Successfully",
+                message: "category Saved Successfully",
                 status: 200,
                 data: data,
             });
         }
     }).catch((err)=>{
         res.json({
-            message: "Something went wrong while saving transaction",
+            message: "Something went wrong while saving category",
                 status: 400,
                 error: err,
         });
     })
 }
 
-exports.getAllTransaction = (req,res) => {
-    transactionSchema.find().then((data)=>{
+exports.getAllCategory = (req,res) => {
+    categorySchema.find().then((data)=>{
         if(!data)
         {
             res.json({
-                message: "Something went wrong while saving transaction",
+                message: "Something went wrong while fetching category",
                 status: 400,
                 error: err,
             });
@@ -42,34 +42,34 @@ exports.getAllTransaction = (req,res) => {
         else
         {
             res.json({
-                message: "Transaction Saved Successfully",
+                message: "category fetched Successfully",
                 status: 200,
                 data: data,
             });
         }
     }).catch((err)=>{
         res.json({
-            message: "Something went wrong while saving transaction",
+            message: "Something went wrong while fetching category",
                 status: 400,
                 error: err,
         });
     })
 }
 
-exports.getTransactionById = (req, res) => {
+exports.getCategoryById = (req, res) => {
     // const proId = req.params.id;
-    transactionSchema
+    categorySchema
       .findById(req.params.id)
       .then((data) => {
         if (!data) {
           res.json({
-            message: "Something went wrong while fetching the Transaction",
+            message: "Something went wrong while fetching the category.",
             status: 400,
             error: err,
           });
         } else {
           res.json({
-            message: "Transaction fetched successfully",
+            message: "category fetched successfully.",
             status: 200,
             data: data,
           });
@@ -77,15 +77,15 @@ exports.getTransactionById = (req, res) => {
       })
       .catch((err) => {
         res.json({
-          message: "Something went wrong while fetching the Transaction",
+          message: "Something went wrong while fetching the category.",
           status: 400,
           error: err,
         });
       });
   };
   
-  exports.updateTransactionById = (req, res) => {
-    transactionSchema
+  exports.updateCategoryById = (req, res) => {
+    categorySchema
       .findOneAndUpdate(
         {
           _id: req.params.id,
@@ -95,55 +95,55 @@ exports.getTransactionById = (req, res) => {
       .then((data) => {
         if (!data) {
           res.json({
-            message: "Something went wrong while updating the Transaction",
+            message: "Something went wrong while updating the category",
             status: 400,
             error: err,
           });
         } else {
           res.json({
-            message: "Transaction updated successfully",
+            message: "category updated successfully",
             status: 200,
             data: data,
           });
         }
       }).catch((err) => {
         res.json({
-          message: "Something went wrong while updating the Transaction",
+            message: "Something went wrong while deleting the All category",
             status: 400,
             error: err,
         })
       })
   };
 
-  exports.deleteAllTransaction = (req,res) => {
-    transactionSchema.deleteMany()
+  exports.deleteAllCategory = (req,res) => {
+    categorySchema.deleteMany()
     .then((data) => {
       if(!data){
         res.json({
-          message: "Something went wrong while deleting the All Transaction",
+          message: "Something went wrong while deleting the All category",
             status: 400,
             error: err,
         });
       }else{
         res.json({
-          message: "All Transaction deleted Successfully",
+          message: "All category deleted Successfully",
             status: 200,
             data: data,
         });
       }
     }).catch((err) => {
       res.json({
-        message: "Something went wrong while deleting the All Transaction",
+        message: "Something went wrong while deleting the All category",
             status: 400,
             error: err,
       })
     })
   }
 
-  exports.deleteTransactionById = (req,res) => {
+  exports.deleteCategoryById = (req,res) => {
     const id = req.params.id;
     console.log(id);
-    transactionSchema.findOneAndDelete(
+    categorySchema.findOneAndDelete(
       {
         _id : id,
       },
@@ -151,20 +151,20 @@ exports.getTransactionById = (req, res) => {
     .then((data) => {
       if(!data){
         res.json({
-          message: "Something went wrong while deleting the transaction",
+          message: "Something went wrong while deleting the category",
             status: 400,
             error: err,
         });
       }else{
         res.json({
-          message: "Transaction deleted Successfully",
+          message: "category deleted Successfully",
             status: 200,
             data: data,
         });
       }
     }).catch((err) => {
       res.json({
-        message: "Something went wrong while deleting the Transaction",
+        message: "Something went wrong while deleting the category",
             status: 400,
             error: err,
       })
