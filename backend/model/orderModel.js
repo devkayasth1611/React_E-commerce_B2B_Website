@@ -6,11 +6,11 @@ const OrderSchema = new Schema(
             type:Date,
             default:Date.now,   
         },
-        orderStatus:{
-            type:String,
-            required:true,
-            trim:true,
-        },
+        // orderStatus:{
+        //     type:String,
+        //     required:true,
+        //     trim:true,
+        // },
         paymentMethod:{
             type:String,
             required:true,
